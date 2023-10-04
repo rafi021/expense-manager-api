@@ -56,7 +56,7 @@ class ExpenseController extends Controller
         if(!$data){
             return $this->ResponseSuccess([], null, 'No Data Found!', 200);
         }
-        return $this->ResponseSuccess($data);
+        return $this->ResponseSuccess(ExpenseResource::make($data));
     }
 
     /**
@@ -66,7 +66,7 @@ class ExpenseController extends Controller
     {
         try {
             $data = $this->expenseRepository->update($request, $slug);
-            return $this->ResponseSuccess($data, null, 'Data Updated Successfully!', 200);
+            return $this->ResponseSuccess(ExpenseResource::make($data), null, 'Data Updated Successfully!', 200);
         } catch (\Exception $e) {
            return $this->ResponseError($e->getMessage());
         }

@@ -99,8 +99,7 @@ class ExpenseRepository implements ExpenseInterface
 
     public function show($slug)
     {
-        $data = Expense::with(['category:id,title,slug,created_at'])->findOrFail($slug);
-        return ExpenseResource::make($data);
+        return Expense::with(['category:id,title,slug,created_at'])->findOrFail($slug);
     }
 
     /*
