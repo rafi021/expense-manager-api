@@ -23,6 +23,7 @@ class StoreExpenseCategoryRequest extends FormRequest
     {
         return [
             'title' => ['required', 'min:4', 'max:80', 'unique:expense_categories,title'],
+            'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
         ];
     }
 }

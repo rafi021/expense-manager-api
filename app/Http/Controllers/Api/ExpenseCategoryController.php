@@ -49,6 +49,7 @@ class ExpenseCategoryController extends Controller
 
     /**
      * Display the specified resource.
+     * Model Binding Approach
      */
     public function show(ExpenseCategory $expenseCategory)
     {
@@ -62,12 +63,13 @@ class ExpenseCategoryController extends Controller
 
     /**
      * Update the specified resource in storage.
+     *  Model Binding Approach
      */
     public function update(UpdateExpenseCategoryRequest $request, ExpenseCategory $expenseCategory)
     {
         try {
             $category = $this->service->update($expenseCategory, ExpenseCategoryDTO::fromApiRequest($request));
-            return $this->ResponseSuccess( ExpenseCategoryResource::make($category));
+            return $this->ResponseSuccess(ExpenseCategoryResource::make($category));
         } catch (\Exception $e) {
             return $this->ResponseError($e->getMessage(), null, 'Data Process Error! Consult Tech Team');
         }
@@ -75,9 +77,15 @@ class ExpenseCategoryController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     *  Normal slug to id approach
      */
-    public function destroy(string $id)
+    public function destroy(ExpenseCategory $expenseCategory)
     {
-        // Implement If needed
+        try {
+            $data = $this->service->delete($expenseCategory->id);
+            return $this->ResponseSuccess($data, null, 'Data Deleted Successfully!', 204);
+        } catch (\Exception $e) {
+           return $this->ResponseError($e->getMessage());
+        }
     }
 }
