@@ -30,7 +30,7 @@ class ExpenseCategoryController extends Controller
             return $this->ResponseSuccess([], null, 'No Data Found!');
         }
         return $this->ResponseSuccess(
-            ExpenseCategoryResource::collection($data), $metadata
+            $data, $metadata
         );
     }
 

@@ -10,12 +10,13 @@ class ExpenseCategoryService
 {
     public function index()
     {
-        return ExpenseCategory::latest()->get();
+        $data = ExpenseCategory::with(['expenses'])->latest()->get();
+        return $this->mapDataProcess($data);
     }
 
     public function show(string $id)
     {
-        return ExpenseCategory::findOrFail($id);
+        return ExpenseCategory::with(['expenses'])->findOrFail($id);
     }
 
     public function store(ExpenseCategoryDTO $expenseCategoryDTO)
@@ -37,5 +38,17 @@ class ExpenseCategoryService
     public function delete(string $id)
     {
         return $this->show($id)->delete();
+    }
+
+    public function mapDataProcess($data){
+        $expense_service = new ExpenseService();
+
+        return $data->map(fn($category) => [
+            'expense_category_id' => $category->id,
+            'expense_title' => $category->title,
+            'expense_slug' => $category->slug,
+            'expense_percentage' => $expense_service->categoryWiseTotalExpensePercentage($category->id),
+            'expenses' => $category->expenses,
+        ]);
     }
 }
