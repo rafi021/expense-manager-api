@@ -17,9 +17,9 @@ class ExpenseCategorySeeder extends Seeder
     public function run(): void
     {
         $dummyExpenseCategoryList = [
-            'Rent',
-            'Bill',
-            'Utility',
+            'Home Rent',
+            'Office Rent',
+            'Utility Bill',
             'Others'
         ];
 
