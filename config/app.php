@@ -1,5 +1,6 @@
 <?php
 
+use App\Providers\ApiServiceProvider;
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
 
@@ -161,6 +162,7 @@ return [
         /*
          * Package Service Providers...
          */
+        ApiServiceProvider::class,
 
         /*
          * Application Service Providers...

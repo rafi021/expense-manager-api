@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\ExpenseCategoryController;
+use App\Http\Controllers\Api\ExpenseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -8,5 +9,6 @@ use Illuminate\Support\Facades\Route;
 
 // Route::middleware(['auth:sanctum'])->group(function(){
     /* Expense Category */
-    Route::apiResource('expense-category', ExpenseCategoryController::class)->except(['destroy']);
+    Route::apiResource('expense-category', ExpenseCategoryController::class);
+    Route::apiResource('expenses', ExpenseController::class);
 // });
